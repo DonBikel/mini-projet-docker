@@ -1,4 +1,8 @@
 CREATE DATABASE db_paymybuddy;
+CREATE USER IF NOT EXISTS 'bikel'@'%' IDENTIFIED BY 'titi';
+GRANT ALL PRIVILEGES ON db_paymybuddy.* TO 'bikel'@'%';
+FLUSH PRIVILEGES;
+
 USE db_paymybuddy;
 
 CREATE TABLE user (

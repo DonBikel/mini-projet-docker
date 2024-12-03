@@ -1,1 +1,29 @@
+version: '3.8'
+services:
+  paymybuddy-db:
+    image: mysql:latest
+    container_name: paymybuddy-db
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
 
+  paymybuddy-backend:
+    image: buddy_app:v4
+    container_name: paymybuddy-backend
+    depends_on:
+      paymybuddy-db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://paymybuddy-db:3306/db_paymybuddy
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
