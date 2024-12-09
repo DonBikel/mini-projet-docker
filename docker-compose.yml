@@ -13,6 +13,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       retries: 5
+    networks:
+      - buddy_network  
 
   paymybuddy-backend:
     image: buddy_app:v4
@@ -23,7 +25,14 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://paymybuddy-db:3306/db_paymybuddy
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
-    ports:
+    ports:  
       - "8080:8080"
     env_file:
       - .env
+    networks:
+      - buddy_network
+
+networks:
+  buddy_network:
+    name: buddy_network
+    driver: bridge

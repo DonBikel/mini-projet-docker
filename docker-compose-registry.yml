@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+  buddy-registry:  
+    image: registry:2.8.1
+    container_name: buddy-registry
+    restart: always
+    ports: 
+      - "5000:5000"
+    volumes:
+      - /opt/docker/registry:/var/lib/registry
+      - ./registry/auth:/auth
+    environment:
+      - REGISTRY_STORAGE_DELETE_ENABLED=true
+      - REGISTRY_AUTH=htpasswd
+      - "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"
+      - REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd
+    command:
+      - /bin/sh
+      - -c
+      - 'apk add --no-cache apache2-utils && htpasswd -Bbn bikel toto > /auth/htpasswd && registry serve /etc/docker/registry/config.yml'
+    networks:
+      - buddy_reg_network
+
+  frontend-reg:
+    image: joxit/docker-registry-ui:2
+    container_name: frontend-reg
+    depends_on:
+      - buddy-registry
+    ports: 
+      - "8081:80"
+    environment:
+      - NGINX_PROXY_PASS_URL=http://buddy-registry:5000
+      - DELETE_IMAGES=true
+      - REGISTRY_TITLE=Buddy
+      - SINGLE_REGISTRY=true
+    networks:
+      - buddy_reg_network
+
+networks:
+  buddy_reg_network:
