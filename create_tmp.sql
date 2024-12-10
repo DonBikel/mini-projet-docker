@@ -1,6 +1,6 @@
 CREATE DATABASE db_paymybuddy;
-CREATE USER IF NOT EXISTS 'bikel'@'%' IDENTIFIED BY 'titi';
-GRANT ALL PRIVILEGES ON db_paymybuddy.* TO 'bikel'@'%';
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+GRANT ALL PRIVILEGES ON db_paymybuddy.* TO '${MYSQL_USER}'@'%';
 FLUSH PRIVILEGES;
 
 USE db_paymybuddy;
@@ -57,11 +57,11 @@ CREATE TABLE transaction (
 );
 
 INSERT INTO `user` (`email`, `password`, `firstname`, `lastname`, `balance`) VALUES
-	('security@mail.com', '$2a$10.ebbkL8VwaG.BrmlIlqRCd0RqoyOIb6hgRZRMfJ51xa', 'Security', 'User', 0.00),
+	('security@mail.com', '$2a$10$vpDkNfBtWg.ebbkL8VwaG.BrmlIlqRCd0RqoyOIb6hgRZRMfJ51xa', 'Security', 'User', 0.00),
 	('hayley@mymail.com', '$2a$10$1NDocQWD9pl52dv/cY7mmOuCYbIVTzCd6ahb5EUDQxwkDMkg1Q54y', 'Hayley', 'James', 10.00),
 	('clara@mail.com', '$2a$10$41nUyaddehEi9Slu/4kFWeedO3YrLnGCu5nZqYySX3CH7uyHMrclu', 'Clara', 'Tarazi', 133.56),
 	('smith@mail.com', '$2a$10$3TU.lRztZJgEueboxsP2b.AV6TeBsKK.qyyCYGYJXKeozeahFVTuu', 'Smith', 'Sam', 8.00),
-	('lambda@mail.com', '$2a$10.itqO3CKrEGuVf2KUxdWOB9fGQh8DvWHPHWIiiR6iZy', 'Lambda', 'User', 96.91);
+	('lambda@mail.com', '$2a$10$prOZuMO22K.itqO3CKrEGuVf2KUxdWOB9fGQh8DvWHPHWIiiR6iZy', 'Lambda', 'User', 96.91);
 
 INSERT INTO `bank_account` (`fk_user_id`, `bank_name`, `iban`, `balance`) VALUES
     (5, 'Banque de France', 'FR7630001007941234567890185', 1590.00),

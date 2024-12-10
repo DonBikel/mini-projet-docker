@@ -24,5 +24,5 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
 # Démarrer l'appilcation Java
-CMD [ "java", "-jar", "paymybuddy.jar" ]
+CMD [ "java", "-jar", "app.jar" ]
 
