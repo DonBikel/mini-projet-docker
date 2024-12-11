@@ -12,7 +12,7 @@ Build and test
 2- Create and set Db User login
     - create a .env file (vi .env), add this following lines and change "your_value", to put yours private login.
     
-     ![image](https://github.com/user-attachments/assets/1b70ab88-71d8-4ef3-b14a-6f15eaf2a9ab)
+![image](https://github.com/user-attachments/assets/1b70ab88-71d8-4ef3-b14a-6f15eaf2a9ab)
    - execute this following commandes to set env values :
            set -a                                            # Exporte automatiquement les variables
 	   . ./.env                                          # Charge le fichier .env
