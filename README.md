@@ -20,7 +20,7 @@ Build and test
   	   envsubst < create_tmp.sql > ./initdb/create.sql   # Remplace les placeholders {{MYSQL_USER}} et {{MYSQL_PASSWORD}}
  
 
-2- Run the application :
+3- Run the application :
    As we've already created the application image, now you just have to run :
 
    - docker compose up -d
@@ -28,7 +28,7 @@ Build and test
 ![image](https://github.com/user-attachments/assets/7a647eb9-6f93-40d4-b3fb-e7abdee11bc0)
 
    
-3 - Test application    
+4 - Test application    
     on browser type: ip_add:8080 , create an account and enjoy the application
     
  ![page de login](https://github.com/user-attachments/assets/93cec4a6-171c-427f-a6d2-4eb08a10d206)
@@ -37,7 +37,7 @@ Build and test
 ![page accueil](https://github.com/user-attachments/assets/ea8d1e98-9d8f-448a-a7fd-4e930c5fab44)
 
 
-2- Create a registry and its frontend
+5- Create a registry and its frontend
     I used registry:2 image for the registry, and joxit/docker-registry-ui:static for its frontend gui and passed some environment variables
 
    - docker compose -f docker-compose-registry.yml up -d
@@ -55,7 +55,7 @@ Build and test
 ![connexion doker registry](https://github.com/user-attachments/assets/eb8d9332-9fc4-42fd-8a91-b06c09b967e9)
 
 
-3- Push an image on the registry and test the gui
+6- Push an image on the registry and test the gui
   
    - docker login localhost:5000
    - docker tag buddy_app:v4 localhost:5000/buddy_app:local
